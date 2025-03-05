@@ -1,94 +1,79 @@
-# Obsidian Sample Plugin
+# Emojination for Obsidian
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+A simple plugin that adds random emojis to your note titles in Obsidian, making your vault more colorful and expressive.
 
-This project uses TypeScript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in TypeScript Definition format, which contains TSDoc comments describing what it does.
+## What it Does
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+Emojination allows you to add random emojis to the beginning of your note titles with a single command. If a note already has an emoji at the start, the plugin will replace it with a new random one.
 
-## First time developing plugins?
+## How to Use
 
-Quick starting guide for new plugin devs:
+1. Open a note in your Obsidian vault
+2. Open the command palette (Ctrl/Cmd + P)
+3. Search for and select "Generate emoji in note title"
+4. A random emoji will be added to the beginning of your note title
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+You can also set up a keyboard shortcut for quick access:
+1. Go to Settings > Hotkeys
+2. Search for "Emojination: Generate emoji in note title"
+3. Click the "+" icon to add your preferred key combination
 
-## Releasing new releases
+The plugin intelligently handles existing emojis:
+- If your title already has an emoji at the beginning, it will be replaced
+- If not, a new emoji will be added to the start of the title
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+## Installation
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+### From Obsidian Community Plugins (Recommended)
+1. Open Obsidian Settings
+2. Go to "Community plugins" and disable "Safe mode"
+3. Click "Browse" and search for "Emojination"
+4. Install the plugin and enable it
 
-## Adding your plugin to the community plugin list
+### Manual Installation
+1. Download `manifest.json` and `main.js` from the latest release
+2. Create a folder called `obsidian-emojination` in your vault's `.obsidian/plugins/` directory
+3. Copy the downloaded files into this folder
+4. Restart Obsidian and enable the plugin in Settings > Community plugins
 
-- Check the [plugin guidelines](https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines).
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+## For Developers
 
-## How to use
+### Setup Development Environment
+1. Clone this repository
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start compilation in watch mode
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+### Contributing
+Contributions are welcome! Feel free to submit a pull request or open an issue if you have suggestions for improvements.
 
-## Manually installing the plugin
+## License
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
+# Obsidian Emojination Plugin
 
-## Funding URL
+Based on the files examined, this is an Obsidian plugin called "obsidian-emojination" that adds random emojis to note titles in Obsidian. Here's a summary of what the plugin does:
 
-You can include funding URLs where people who use your plugin can financially support it.
+## Functionality
+- The plugin provides a command "Generate emoji in note title" that users can run
+- When triggered, it:
+  - Checks if the note title already has an emoji at the beginning
+  - Removes any existing emoji if present
+  - Generates a random emoji and adds it to the beginning of the note title
+  - Renames the file with the new emoji-prefixed title
 
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
+## Implementation Details
+- The plugin is written in TypeScript
+- It uses two npm packages for emoji handling:
+  - `node-emoji`: For getting random emojis
+  - `emoji-regex`: For detecting and working with emojis in strings
+- It contains utility functions in `utils.ts`:
+  - `startsWithEmojiAndSpace()`: Checks if a string starts with an emoji followed by a space
+  - `removeEmojiAndSpace()`: Removes the emoji and space from the beginning of a string
+  - `getRandomEmoji()`: Gets a random emoji using the node-emoji library
 
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+## Project Structure
+- Standard Obsidian plugin structure with TypeScript
+- Main functionality is in `main.ts` which defines the plugin class
+- Utility functions in `utils.ts`
+- Built version in `main.js`
