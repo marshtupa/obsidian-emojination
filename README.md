@@ -49,31 +49,3 @@ Contributions are welcome! Feel free to submit a pull request or open an issue i
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
-# Obsidian Emojination Plugin
-
-Based on the files examined, this is an Obsidian plugin called "obsidian-emojination" that adds random emojis to note titles in Obsidian. Here's a summary of what the plugin does:
-
-## Functionality
-- The plugin provides a command "Generate emoji in note title" that users can run
-- When triggered, it:
-  - Checks if the note title already has an emoji at the beginning
-  - Removes any existing emoji if present
-  - Generates a random emoji and adds it to the beginning of the note title
-  - Renames the file with the new emoji-prefixed title
-
-## Implementation Details
-- The plugin is written in TypeScript
-- It uses two npm packages for emoji handling:
-  - `node-emoji`: For getting random emojis
-  - `emoji-regex`: For detecting and working with emojis in strings
-- It contains utility functions in `utils.ts`:
-  - `startsWithEmojiAndSpace()`: Checks if a string starts with an emoji followed by a space
-  - `removeEmojiAndSpace()`: Removes the emoji and space from the beginning of a string
-  - `getRandomEmoji()`: Gets a random emoji using the node-emoji library
-
-## Project Structure
-- Standard Obsidian plugin structure with TypeScript
-- Main functionality is in `main.ts` which defines the plugin class
-- Utility functions in `utils.ts`
-- Built version in `main.js`
