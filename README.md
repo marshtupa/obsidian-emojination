@@ -2,6 +2,9 @@
 
 A simple plugin that adds random emojis to your note titles in Obsidian, making your vault more colorful and expressive.
 
+![output](https://github.com/user-attachments/assets/be7c0c22-3345-4e42-9774-9c7bfcb61bb0)
+
+
 ## What it Does
 
 Emojination allows you to add random emojis to the beginning of your note titles with a single command. If a note already has an emoji at the start, the plugin will replace it with a new random one.
